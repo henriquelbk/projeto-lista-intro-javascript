@@ -142,9 +142,12 @@ function checaRenovacaoRG() {
   const anoNasc = Number(prompt('Em qual ano fulano nasceu?'))
   const anoRG = Number(prompt('Em qual ano o RG de fulano foi emitido?'))
 
-  const renovacao20 = anoAtual - anoNasc <= 20 && anoAtual - anoRG >= 5
-  const renovacao21a50 = anoAtual - anoNasc > 20 <= 50 && anoAtual - anoRG >= 10
-  const renovacao51Mais = anoAtual - anoNasc > 50 && anoAtual - anoRG >= 15
+  const idade13 = anoAtual - anoNasc
+  const tempoRG = anoAtual - anoRG
+
+  const renovacao20 = idade13 <= 20 && tempoRG >= 5
+  const renovacao21a50 = idade13 > 20 && idade13 <= 50 && tempoRG >=10
+  const renovacao51Mais = idade13 > 50 && tempoRG >= 15
 
   console.log(renovacao20 || renovacao21a50 || renovacao51Mais)
 }
@@ -152,17 +155,22 @@ function checaRenovacaoRG() {
 // EXERCÍCIO 14
 function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
-  const anoBissexto = ano
+  const cond1 = ano % 400 === 0
+  const cond2 = (ano % 4 === 0) && !(ano % 100 === 0 && ano % 400 !== 0)
 
-  return anoBissexto % 400 && anoBissexto % 4 && anoBissexto % 100 !== 0
+  return cond1 || cond2 
 }
 
 // EXERCÍCIO 15
 function checaValidadeInscricaoLabenu() {
   // implemente sua lógica aqui
-  const maioridade = Boolean(prompt('Tem mais de 18 anos?'))
-  const EM = Boolean(prompt('Tem Ensino Médio completo?'))
-  const disponibilidade = Boolean(prompt('Tem disponibilidade exclusiva?'))
+  const maioridade = prompt('Tem mais de 18 anos?')
+  const EM = prompt('Tem Ensino Médio completo?')
+  const disponibilidade = prompt('Tem disponibilidade exclusiva?')
 
-  console.log(maioridade && EM && disponibilidade)
+  const eMaior = maioridade.includes('sim')
+  const temEM = EM.includes('sim')
+  const disponivel = disponibilidade.includes('sim')
+
+  console.log(eMaior && temEM && disponivel)
 }
